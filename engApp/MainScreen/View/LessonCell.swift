@@ -1,14 +1,14 @@
 //
-//  ListCell.swift
+//  LessonCell.swift
 //  engApp
 //
-//  Created by Ilya on 19.11.2022.
+//  Created by Ilya on 03.12.2022.
 //
 
 import UIKit
 
-class ListCell: UICollectionViewCell {
-    static let reuseIdentifier = "list-cell-reuse-identifier"
+class LessonCell: UICollectionViewCell {
+    static let reuseIdentifier = "lesson-cell-reuse-identifier"
     let label = UILabel()
     let accessoryImageView = UIImageView()
     let seperatorView = UIView()
@@ -22,14 +22,15 @@ class ListCell: UICollectionViewCell {
     }
 }
 
-extension ListCell {
+extension LessonCell {
     
     
-    func setup(_ item: ListItem) {
+    func setup(_ item: LessonItem) {
         label.text = item.title
        }
     
     func configure() {
+        self.backgroundColor = .green
         seperatorView.translatesAutoresizingMaskIntoConstraints = false
         seperatorView.backgroundColor = .lightGray
         contentView.addSubview(seperatorView)
@@ -70,3 +71,4 @@ extension ListCell {
             ])
     }
 }
+

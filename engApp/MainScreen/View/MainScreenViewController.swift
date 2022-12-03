@@ -32,11 +32,10 @@ class MainScreenViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-       
-      
         collectionView.collectionViewLayout = createLayout()
-        collectionView.register(TextCell.self, forCellWithReuseIdentifier: TextCell.reuseIdentifier)
-        collectionView.register(ListCell.self, forCellWithReuseIdentifier: ListCell.reuseIdentifier)
+        collectionView.register(DailyTaskCell.self, forCellWithReuseIdentifier: DailyTaskCell.reuseIdentifier)
+        collectionView.register(PromotionCell.self, forCellWithReuseIdentifier: PromotionCell.reuseIdentifier)
+        collectionView.register(LessonCell.self, forCellWithReuseIdentifier: LessonCell.reuseIdentifier)
         view.addSubview(collectionView)
        
     }
@@ -90,29 +89,37 @@ extension MainScreenViewController {
             guard let self = self else {return nil}
             let section = self.sections[sectionIndex]
             switch section{
-            case .popular(_):
-                return self.createPopularSection()
-            case .comingSoon(_):
-                return  self.createComingSoonSection()
+            case .dailyTasks(_):
+                return self.createDailyTasksSection()
+            case .promotions(_):
+                return  self.createPromoSection()
+            case .lessons(_):
+                return  self.createLessonsSection()
             }
         }
     }
     
     
-    private func createPopularSection()->NSCollectionLayoutSection{
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.2)), subitems: [item])
-        
+    private func createDailyTasksSection()->NSCollectionLayoutSection{
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                             heightDimension: .fractionalHeight(2.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalWidth(0.2))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                         subitems: [item])
+
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .groupPaging
-        section.interGroupSpacing = 5
-        section.contentInsets = .init(top: 0, leading: -10, bottom: 0, trailing: 0)
+       // section.orthogonalScrollingBehavior = .groupPaging
+        section.interGroupSpacing = 8
+        section.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
         return section
         
     }
     
-    private func createComingSoonSection()->NSCollectionLayoutSection{
+    private func createPromoSection()->NSCollectionLayoutSection{
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.2)), subitems: [item])
@@ -120,7 +127,20 @@ extension MainScreenViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         section.interGroupSpacing = 5
-        section.contentInsets = .init(top: 0, leading: -10, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
+        return section
+        
+    }
+    
+    private func createLessonsSection()->NSCollectionLayoutSection{
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.2)), subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+       
+        section.interGroupSpacing = 8
+        section.contentInsets = .init(top: 10, leading: 10, bottom: 0, trailing: 10)
         return section
         
     }
@@ -149,17 +169,23 @@ extension MainScreenViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section]{
             
-        case .popular(let popular):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TextCell.reuseIdentifier, for: indexPath) as? TextCell else {
+        case .dailyTasks(let dailyTasks):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyTaskCell.reuseIdentifier, for: indexPath) as? DailyTaskCell else {
                 return UICollectionViewCell()
             }           
-            cell.setup(popular[indexPath.row])
+            cell.setup(dailyTasks[indexPath.row])
             return cell
-        case .comingSoon(let comingSoon):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCell.reuseIdentifier, for: indexPath) as? ListCell else {
+        case .promotions(let promotions):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PromotionCell.reuseIdentifier, for: indexPath) as? PromotionCell else {
                 return UICollectionViewCell()
             }
-            cell.setup(comingSoon[indexPath.row])
+            cell.setup(promotions[indexPath.row])
+            return cell
+        case .lessons(let lessons):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LessonCell.reuseIdentifier, for: indexPath) as? LessonCell else {
+                return UICollectionViewCell()
+            }
+            cell.setup(lessons[indexPath.row])
             return cell
         }
     }
@@ -181,15 +207,43 @@ struct ListItem {
     let title: String
 }
 
+
+struct DailyTaskItem {
+    let title: String
+    let description: String
+    let progressCount: Int
+    let totalCount: Int
+   
+}
+
+struct PromoItem {
+    let title: String
+    let description: String
+    let color: String
+    let actionButtonTitle: String
+}
+
+
+struct LessonItem {
+    let title: String
+    let description: String
+    let totalCount: Int
+    let completed: Bool
+}
+
+
 enum ListSection {
-    case popular([ListItem])
-    case comingSoon([ListItem])
+    case dailyTasks([DailyTaskItem])
+    case promotions([PromoItem])
+    case lessons([LessonItem])
     
-    var items: [ListItem] {
+    var items: [Any] {
         switch self {
-        case .popular(let items):
+        case .dailyTasks(let items):
             return items
-        case .comingSoon(let items):
+        case .promotions(let items):
+            return items
+        case .lessons(let items):
             return items
         }
     }
@@ -201,10 +255,12 @@ enum ListSection {
     var title: String {
         switch self {
             
-        case .popular:
-            return "Popular"
-        case .comingSoon:
-            return "Coming Soon"
+        case .dailyTasks:
+            return "Daily tasks"
+        case .promotions:
+            return "promo"
+        case .lessons(_):
+            return "Lessons"
         }
     }
 }
@@ -212,25 +268,28 @@ enum ListSection {
 struct MockData {
     static let shared = MockData()
     
-       
-    private let popular: ListSection = {
-        .popular([.init(title: "Naruto"),
-                  .init(title: "Jujutsu Kaisen"),
-                  .init(title: "Demon Slayer"),
-                  .init(title: "One Piece"),
-                  .init(title: "Seven Deadly Sins")])
+    
+    private let dailyTasks: ListSection = {
+        .dailyTasks([.init(title: "Level", description: "Intermediate", progressCount: 20, totalCount: 100 ),
+                     .init(title: "Tasks", description: "Completed tasks", progressCount: 5, totalCount: 20 ),
+                     .init(title: "Dayly goal", description: "Learning tasks", progressCount: 5, totalCount: 20 ),
+                     .init(title: "Study days", description: "Your progress", progressCount: 25, totalCount: 62 ),])
     }()
     
-    private let comingSoon: ListSection = {
-        .comingSoon([.init(title: "Tokyo Ghoul"),
-                     .init(title: "Record of Ragnarok"),
-                     .init(title: "Kaisen Returns"),
-                     .init(title: "No Idea"),
-                     .init(title: "Looks interesting")])
+    private let promotions: ListSection = {
+        .promotions([.init(title: "", description: "", color: "", actionButtonTitle: "" ),
+                     .init(title: "", description: "", color: "", actionButtonTitle: "" )])
+    }()
+    
+    private let lessons: ListSection = {
+        .lessons([.init(title: "Level", description: "Intermediate", totalCount: 20, completed: false ),
+                  .init(title: "Level", description: "Intermediate", totalCount: 20, completed: false ),
+                  .init(title: "Level", description: "Intermediate", totalCount: 20, completed: false ),
+                  .init(title: "Level", description: "Intermediate", totalCount: 20, completed: false )])
     }()
     
     var pageData: [ListSection] {
-        [popular, comingSoon]
+        [dailyTasks, promotions, lessons]
     }
 }
 

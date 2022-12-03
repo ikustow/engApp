@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0923CDE2293BE58F00211E07 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0923CDE1293BE58F00211E07 /* LessonCell.swift */; };
 		0949A64D29256D1B00BB197D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A64C29256D1B00BB197D /* AppDelegate.swift */; };
 		0949A64F29256D1B00BB197D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A64E29256D1B00BB197D /* SceneDelegate.swift */; };
 		0949A65129256D1B00BB197D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A65029256D1B00BB197D /* AuthViewController.swift */; };
@@ -19,11 +20,12 @@
 		0949A672292938BA00BB197D /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A671292938BA00BB197D /* MainScreenViewController.swift */; };
 		0949A6742929394900BB197D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A6732929394900BB197D /* TestView.swift */; };
 		0949A6762929397200BB197D /* TestView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A6752929397200BB197D /* TestView+Extension.swift */; };
-		0949A678292955FE00BB197D /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A677292955FE00BB197D /* TextCell.swift */; };
-		0949A67A29295A2700BB197D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A67929295A2700BB197D /* ListCell.swift */; };
+		0949A678292955FE00BB197D /* DailyTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A677292955FE00BB197D /* DailyTaskCell.swift */; };
+		0949A67A29295A2700BB197D /* PromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949A67929295A2700BB197D /* PromotionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0923CDE1293BE58F00211E07 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		0949A64929256D1B00BB197D /* engApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = engApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0949A64C29256D1B00BB197D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0949A64E29256D1B00BB197D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -38,8 +40,8 @@
 		0949A671292938BA00BB197D /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		0949A6732929394900BB197D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		0949A6752929397200BB197D /* TestView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestView+Extension.swift"; sourceTree = "<group>"; };
-		0949A677292955FE00BB197D /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
-		0949A67929295A2700BB197D /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		0949A677292955FE00BB197D /* DailyTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTaskCell.swift; sourceTree = "<group>"; };
+		0949A67929295A2700BB197D /* PromotionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				0949A671292938BA00BB197D /* MainScreenViewController.swift */,
-				0949A677292955FE00BB197D /* TextCell.swift */,
-				0949A67929295A2700BB197D /* ListCell.swift */,
+				0949A677292955FE00BB197D /* DailyTaskCell.swift */,
+				0949A67929295A2700BB197D /* PromotionCell.swift */,
+				0923CDE1293BE58F00211E07 /* LessonCell.swift */,
 				0949A6732929394900BB197D /* TestView.swift */,
 				0949A6752929397200BB197D /* TestView+Extension.swift */,
 			);
@@ -234,9 +237,10 @@
 				0949A672292938BA00BB197D /* MainScreenViewController.swift in Sources */,
 				0949A6742929394900BB197D /* TestView.swift in Sources */,
 				0949A66D292937D100BB197D /* MainScreenData.swift in Sources */,
-				0949A67A29295A2700BB197D /* ListCell.swift in Sources */,
+				0923CDE2293BE58F00211E07 /* LessonCell.swift in Sources */,
+				0949A67A29295A2700BB197D /* PromotionCell.swift in Sources */,
 				0949A666292933CD00BB197D /* ViewData.swift in Sources */,
-				0949A678292955FE00BB197D /* TextCell.swift in Sources */,
+				0949A678292955FE00BB197D /* DailyTaskCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
