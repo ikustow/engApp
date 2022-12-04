@@ -16,8 +16,8 @@ class MainScreenViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-        collectionView.backgroundColor = .white
-        //collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = #colorLiteral(red: 0.9850044847, green: 0.956602037, blue: 0.9647008777, alpha: 1)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -26,6 +26,7 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.9850044847, green: 0.956602037, blue: 0.9647008777, alpha: 1)
         setDelegates()
         setupCollectionView()
         setupConstraints()
@@ -101,13 +102,14 @@ extension MainScreenViewController {
     
     
     private func createDailyTasksSection()->NSCollectionLayoutSection{
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                             heightDimension: .fractionalHeight(2.0))
+                                             heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                              heightDimension: .fractionalWidth(0.2))
+                                              heightDimension: .fractionalWidth(0.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                          subitems: [item])
 
@@ -122,7 +124,7 @@ extension MainScreenViewController {
     private func createPromoSection()->NSCollectionLayoutSection{
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.2)), subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.15)), subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
@@ -135,7 +137,7 @@ extension MainScreenViewController {
     private func createLessonsSection()->NSCollectionLayoutSection{
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.2)), subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.15)), subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
        
@@ -277,15 +279,14 @@ struct MockData {
     }()
     
     private let promotions: ListSection = {
-        .promotions([.init(title: "", description: "", color: "", actionButtonTitle: "" ),
-                     .init(title: "", description: "", color: "", actionButtonTitle: "" )])
+        .promotions([.init(title: "50% Discount", description: "Premium subscription", color: "orange", actionButtonTitle: "Get Premium" ),
+                     .init(title: "Speaking club", description: "free!", color: "blue", actionButtonTitle: "Join now" )])
     }()
     
     private let lessons: ListSection = {
-        .lessons([.init(title: "Level", description: "Intermediate", totalCount: 20, completed: false ),
-                  .init(title: "Level", description: "Intermediate", totalCount: 20, completed: false ),
-                  .init(title: "Level", description: "Intermediate", totalCount: 20, completed: false ),
-                  .init(title: "Level", description: "Intermediate", totalCount: 20, completed: false )])
+        .lessons([.init(title: "English verbs vs ToBe", description: "Learn differnece", totalCount: 5, completed: false ),
+                  .init(title: "Telling time", description: "Learn how to speak about time", totalCount: 4, completed: false ),
+                  .init(title: "Daily routine", description: "Describe your day", totalCount: 6, completed: true)])
     }()
     
     var pageData: [ListSection] {
